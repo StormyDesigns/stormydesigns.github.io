@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Stormy Jackson</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a1a; }
+
+/* NAV */
+.nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 2.5rem; border-bottom: 1px solid #e8e4d8;
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,253,247,0.92);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.nav-logo { font-size: 15px; font-weight: 600; color: #1a1a1a; text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; font-size: 14px; }
+.nav-links a { text-decoration: none; color: #888; transition: color 0.2s; }
+.nav-links a:hover { color: #1a1a1a; }
+.nav-links a.active { color: #1a1a1a; font-weight: 600; }
+
+/* INTRO */
+.gallery-intro {
+  padding: 3.5rem 2.5rem 2.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.gallery-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #999; margin-bottom: 0.8rem;
+}
+.gallery-title {
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.1;
+}
+.gallery-title span { color: #FD830B; font-style: italic; }
+.gallery-sub {
+  margin-top: 1rem; font-size: 16px; color: #666; line-height: 1.6;
+}
+
+/* GALLERY WALL */
+.gallery-wall {
+  padding: 1.5rem 3rem 5rem;
+  columns: 3 260px;
+  column-gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* PIECE — the column item with rotation */
+.piece {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 2.8rem;
+  cursor: pointer;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), filter 0.2s;
+  position: relative;
+  z-index: 1;
+}
+.piece:hover {
+  transform: rotate(0deg) scale(1.025) !important;
+  z-index: 10;
+  filter: brightness(1.03);
+}
+
+/* FRAME — border/visual shell */
+.frame { display: block; width: 100%; line-height: 0; }
+.frame img { width: 100%; height: auto; display: block; }
+.mat { line-height: 0; }
+.mat img { width: 100%; height: auto; display: block; }
+
+
+
+/* ---- FRAME STYLES ---- */
+
+/* 1. Ornate Gold */
+.frame-gold {
+  padding: 10px;
+  background: linear-gradient(135deg, #b8860b 0%, #f5d580 25%, #c9a53e 50%, #f5d580 75%, #8b6914 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.35),
+    inset 0 0 0 5px rgba(140,95,0,0.35),
+    6px 14px 36px rgba(0,0,0,0.35),
+    2px 3px 8px rgba(0,0,0,0.18);
+}
+.frame-gold .mat { padding: 8px; background: #f7f4ee; }
+
+/* 2. Thin Black (modern) */
+.frame-thin-black {
+  padding: 4px;
+  background: #1a1a1a;
+  box-shadow:
+    4px 10px 24px rgba(0,0,0,0.32),
+    1px 2px 5px rgba(0,0,0,0.14);
+}
+.frame-thin-black .mat { padding: 16px; background: #fafaf8; }
+
+/* 3. Baroque Gold (wide, ornate) */
+.frame-baroque {
+  padding: 16px;
+  background: linear-gradient(135deg, #b8860b 0%, #ffd700 18%, #daa520 38%, #fff0a0 55%, #daa520 70%, #b8860b 88%, #7a5c00 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,0.4),
+    inset 0 0 0 8px rgba(120,80,0,0.3),
+    8px 18px 44px rgba(0,0,0,0.42),
+    2px 4px 10px rgba(0,0,0,0.2);
+}
+.frame-baroque .mat { padding: 12px; background: #f5f0e6; }
+
+/* 4. Dark Mahogany */
+.frame-mahogany {
+  padding: 14px;
+  background: linear-gradient(135deg, #3e1a06 0%, #7a3410 25%, #5c2a0c 50%, #8b4513 75%, #3e1a06 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,180,80,0.12),
+    inset 0 0 0 5px rgba(20,5,0,0.35),
+    7px 16px 38px rgba(0,0,0,0.42),
+    2px 4px 10px rgba(0,0,0,0.22);
+}
+
+/* 5. Antique Silver */
+.frame-silver {
+  padding: 12px;
+  background: linear-gradient(135deg, #888 0%, #ccc 28%, #999 50%, #bbb 72%, #777 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.45),
+    inset 0 0 0 4px rgba(70,70,70,0.3),
+    5px 12px 28px rgba(0,0,0,0.3),
+    1px 2px 6px rgba(0,0,0,0.14);
+}
+.frame-silver .mat { padding: 10px; background: #f2efe8; }
+
+/* 6. Burgundy / Dark Red */
+.frame-burgundy {
+  padding: 13px;
+  background: linear-gradient(135deg, #3d0c0c 0%, #6e1a1a 28%, #4e1010 50%, #6e1a1a 72%, #3d0c0c 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(200,80,80,0.18),
+    inset 0 0 0 5px rgba(15,0,0,0.35),
+    6px 14px 34px rgba(0,0,0,0.42),
+    2px 3px 8px rgba(0,0,0,0.2);
+}
+.frame-burgundy .mat { padding: 10px; background: #f8f4ee; }
+
+/* 7. Cream / Ivory (wide mat) */
+.frame-cream {
+  padding: 16px;
+  background: #ddd5c0;
+  box-shadow:
+    inset 0 0 0 2px #c8bfa8,
+    inset 0 0 0 6px #e8e0cc,
+    5px 12px 30px rgba(0,0,0,0.26),
+    2px 3px 8px rgba(0,0,0,0.12);
+}
+.frame-cream .mat { padding: 18px; background: #faf7f0; box-shadow: inset 0 0 10px rgba(0,0,0,0.04); }
+
+/* 8. Black with wide cream mat */
+.frame-black-mat {
+  padding: 10px;
+  background: #111;
+  box-shadow:
+    6px 14px 36px rgba(0,0,0,0.44),
+    2px 4px 8px rgba(0,0,0,0.22);
+}
+.frame-black-mat .mat { padding: 22px; background: #f4f1e8; box-shadow: inset 0 0 0 1px #ddd8cc; }
+
+/* 9. Antique Bronze */
+.frame-bronze {
+  padding: 11px;
+  background: linear-gradient(135deg, #5a3e1e 0%, #b87333 28%, #7a5230 50%, #b87333 72%, #4a3010 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,190,80,0.18),
+    inset 0 0 0 5px rgba(30,15,0,0.28),
+    6px 14px 30px rgba(0,0,0,0.38),
+    2px 3px 8px rgba(0,0,0,0.18);
+}
+
+/* 10. Forest Green */
+.frame-forest {
+  padding: 12px;
+  background: linear-gradient(135deg, #122818 0%, #254d30 28%, #1a3822 50%, #254d30 72%, #0e2014 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(80,180,80,0.12),
+    inset 0 0 0 5px rgba(0,15,0,0.35),
+    6px 14px 32px rgba(0,0,0,0.38),
+    2px 3px 8px rgba(0,0,0,0.18);
+}
+
+/* 11. Deep Navy */
+.frame-navy {
+  padding: 13px;
+  background: linear-gradient(135deg, #0d1b2e 0%, #1a3558 28%, #122440 50%, #1a3558 72%, #0a1422 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(100,160,255,0.12),
+    inset 0 0 0 5px rgba(0,5,20,0.35),
+    6px 14px 34px rgba(0,0,0,0.42),
+    2px 3px 8px rgba(0,0,0,0.2);
+}
+.frame-navy .mat { padding: 10px; background: #f0eee8; }
+
+/* 12. Warm Oak */
+.frame-oak {
+  padding: 13px;
+  background: linear-gradient(135deg, #8b6340 0%, #c4935a 28%, #a07448 50%, #c4935a 72%, #7a5230 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,220,140,0.18),
+    inset 0 0 0 5px rgba(50,25,0,0.28),
+    6px 14px 32px rgba(0,0,0,0.36),
+    2px 3px 8px rgba(0,0,0,0.18);
+}
+
+/* 13. Dusty Rose */
+.frame-rose {
+  padding: 12px;
+  background: linear-gradient(135deg, #9e6070 0%, #c4849a 28%, #ae7080 50%, #c4849a 72%, #8a5060 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,200,210,0.2),
+    inset 0 0 0 5px rgba(60,20,30,0.25),
+    6px 14px 32px rgba(0,0,0,0.35),
+    2px 3px 8px rgba(0,0,0,0.18);
+}
+.frame-rose .mat { padding: 10px; background: #fdf5f0; }
+
+/* SPOTLIGHT OVERLAY */
+.spotlight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  background: rgba(8,6,4,0.95);
+  cursor: zoom-out;
+}
+/* warm spotlight beam */
+.spotlight-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 45% 55% at 50% 45%,
+    rgba(255,230,160,0.10) 0%,
+    rgba(255,200,100,0.04) 40%,
+    transparent 70%);
+  pointer-events: none;
+}
+.spotlight-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* spotlight content */
+.spotlight-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  transform: scale(0.9) translateY(16px);
+  transition: transform 0.45s cubic-bezier(0.34,1.4,0.64,1);
+  cursor: default;
+  max-width: min(82vw, 560px);
+}
+.spotlight-overlay.active .spotlight-inner {
+  transform: scale(1) translateY(0);
+}
+
+/* frame shown in spotlight (elegant thin gold) */
+.spotlight-frame {
+  padding: 8px;
+  background: linear-gradient(135deg, #b8860b 0%, #f5d580 30%, #c9a53e 60%, #8b6914 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.3),
+    inset 0 0 0 4px rgba(120,80,0,0.3),
+    0 0 60px rgba(255,200,80,0.18),
+    0 20px 60px rgba(0,0,0,0.6),
+    0 4px 12px rgba(0,0,0,0.4);
+  line-height: 0;
+}
+.spotlight-frame .mat {
+  padding: 10px;
+  background: #f7f4ee;
+  line-height: 0;
+}
+.spotlight-frame img {
+  max-height: 68vh;
+  max-width: min(78vw, 520px);
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+
+/* close button */
+.spotlight-close {
+  position: fixed;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.7);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  z-index: 1001;
+}
+.spotlight-close:hover { background: rgba(255,255,255,0.16); color: #fff; }
+
+.spotlight-hint {
+  position: fixed;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .gallery-wall { columns: 2 220px; column-gap: 2rem; padding: 1.5rem 2rem 4rem; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 1rem 1.2rem; }
+  .nav-links { display: none; }
+  .gallery-intro { padding: 2.5rem 1.2rem 2rem; }
+  .gallery-wall { padding: 1rem 1.2rem 3.5rem; columns: 2 160px; column-gap: 1.2rem; }
+  .piece { margin-bottom: 1.8rem; }
+}
+@media (max-width: 440px) {
+  .gallery-wall { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Stormy Jackson</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="/Stormy-Jackson-Resume.pdf" target="_blank">Resume</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div class="gallery-intro">
+  <div class="gallery-tag">Illustration · Personal Work</div>
+  <h1 class="gallery-title">My <span>gallery.</span></h1>
+  <p class="gallery-sub">Digital illustrations I've made for fun. Tap any piece to take a closer look.</p>
+</div>
+
+<!-- GALLERY WALL -->
+<div class="gallery-wall">
+
+  <div class="piece" style="--rot: -1.8deg" onclick="openSpotlight(this)" data-title="Flower Girl">
+    <div class="frame frame-gold">
+      <div class="mat"><img src="art/flower-girl.png" alt="Flower Girl"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 1.2deg" onclick="openSpotlight(this)" data-title="Mellow">
+    <div class="frame frame-thin-black">
+      <div class="mat"><img src="art/mellow-portrait.png" alt="Mellow"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 2.2deg" onclick="openSpotlight(this)" data-title="Coffee Shop">
+    <div class="frame frame-baroque">
+      <div class="mat"><img src="art/coffee-shop.png" alt="Coffee Shop"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -0.8deg" onclick="openSpotlight(this)" data-title="Goddess">
+    <div class="frame frame-mahogany">
+      <img src="art/goddess.png" alt="Goddess">
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 1.9deg" onclick="openSpotlight(this)" data-title="Sky High">
+    <div class="frame frame-silver">
+      <div class="mat"><img src="art/sky-high.png" alt="Sky High"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -2.4deg" onclick="openSpotlight(this)" data-title="Cheers! ¡Salud!">
+    <div class="frame frame-burgundy">
+      <div class="mat"><img src="art/cheers.png" alt="Cheers! ¡Salud!"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -1.4deg" onclick="openSpotlight(this)" data-title="Ebony in Yellow">
+    <div class="frame frame-cream">
+      <div class="mat"><img src="art/ebony-in-yellow.png" alt="Ebony in Yellow"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 0.9deg" onclick="openSpotlight(this)" data-title="Yoga">
+    <div class="frame frame-black-mat">
+      <div class="mat"><img src="art/yoga.png" alt="Yoga"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 2.6deg" onclick="openSpotlight(this)" data-title="Croissant">
+    <div class="frame frame-bronze">
+      <img src="art/croissant.png" alt="Croissant">
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -1.1deg" onclick="openSpotlight(this)" data-title="Market Day">
+    <div class="frame frame-forest">
+      <img src="art/market-day.png" alt="Market Day">
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 1.6deg" onclick="openSpotlight(this)" data-title="Walk That Walk">
+    <div class="frame frame-navy">
+      <div class="mat"><img src="art/walk-that-walk.png" alt="Walk That Walk"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -2deg" onclick="openSpotlight(this)" data-title="Cats Cats Cats">
+    <div class="frame frame-oak">
+      <img src="art/cats-cats-cats.png" alt="Cats Cats Cats">
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: 1.1deg" onclick="openSpotlight(this)" data-title="Cherries">
+    <div class="frame frame-rose">
+      <div class="mat"><img src="art/cherries.png" alt="Cherries"></div>
+    </div>
+  </div>
+
+  <div class="piece" style="--rot: -1.6deg" onclick="openSpotlight(this)" data-title="Lemons">
+    <div class="frame frame-thin-black">
+      <div class="mat"><img src="art/lemons.png" alt="Lemons"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SPOTLIGHT OVERLAY -->
+<div class="spotlight-overlay" id="spotlightOverlay" onclick="handleOverlayClick(event)">
+  <button class="spotlight-close" onclick="closeSpotlight(event)" aria-label="Close">✕</button>
+  <div class="spotlight-inner">
+    <div class="spotlight-frame">
+      <div class="mat">
+        <img id="spotlightImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="spotlight-hint">Esc or tap outside to close</div>
+</div>
+
+<script>
+function openSpotlight(pieceEl) {
+  const img = pieceEl.querySelector('img');
+  const sImg = document.getElementById('spotlightImg');
+  sImg.src = img.src;
+  sImg.alt = img.alt;
+  document.getElementById('spotlightOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSpotlight(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('spotlightOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('spotlightOverlay') ||
+      e.target.classList.contains('spotlight-hint')) {
+    closeSpotlight();
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSpotlight();
+});
+</script>
+
+</body>
+</html>
