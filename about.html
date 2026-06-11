@@ -23,36 +23,61 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
 .nav-back { font-size: 14px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
 .nav-back:hover { color: #FD830B; }
 
-/* HERO */
-.about-hero {
-  background: #1a1a1a;
-  padding: 5rem 2.5rem 4rem;
-}
-.about-hero-inner { max-width: 860px; margin: 0 auto; }
-.about-tag {
-  display: inline-block; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5);
-  margin-bottom: 1.2rem;
-}
-.about-title {
-  font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; color: #fff;
-  line-height: 1.1; letter-spacing: -0.03em;
-}
-.about-title span { color: #FD830B; font-style: italic; }
-
 /* BODY */
-.about-body { max-width: 800px; margin: 0 auto; padding: 4rem 2.5rem; }
+.about-body { max-width: 860px; margin: 0 auto; padding: 3rem 2.5rem 4rem; }
 
-/* PHOTO */
-.about-photo-wrap {
-  margin-bottom: 3.5rem;
+/* GREETING */
+.about-greeting {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
 }
-.about-photo {
+
+/* MOODBOARD */
+.moodboard-wrap {
   width: 100%;
-  max-width: 420px;
-  height: auto;
-  border-radius: 16px;
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+  overflow: visible;
+}
+.moodboard {
+  position: relative;
+  width: 800px;
+  height: 510px;
+  transform-origin: top left;
+}
+.mb {
+  position: absolute;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: 3px;
+  box-shadow: 2px 5px 18px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
+}
+.mb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
+}
+/* polaroid style */
+.mb.polar {
+  background: #fff;
+  padding: 7px 7px 24px;
+  border-radius: 2px;
+  box-shadow: 2px 6px 22px rgba(0,0,0,0.22);
+}
+/* product shots — remove white bg, float on top */
+.mb.cutout {
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  mix-blend-mode: multiply;
+}
+.mb.cutout img {
+  border-radius: 0;
 }
 
 /* BIO */
@@ -108,8 +133,7 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
 @media (max-width: 768px) {
   .nav { padding: 1rem 1.2rem; }
   .nav-links { display: none; }
-  .about-hero { padding: 3rem 1.2rem 2.5rem; }
-  .about-body { padding: 2.5rem 1.2rem; }
+  .about-body { padding: 2rem 1.2rem 3rem; }
   .cs-footer-nav { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.2rem; }
 }
 </style>
@@ -122,24 +146,77 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   <div class="nav-links">
     <a href="index.html#work">Work</a>
     <a href="/Stormy-Jackson-Resume.pdf" target="_blank">Resume</a>
+    <a href="gallery.html">Gallery</a>
     <a href="about.html">About</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="about-hero">
-  <div class="about-hero-inner">
-    <div class="about-tag">Product Designer · UX</div>
-    <h1 class="about-title">Hi, I'm Stormy.<br><span>Nice to meet you.</span></h1>
-  </div>
-</div>
-
 <!-- BODY -->
 <div class="about-body">
 
-  <div class="about-photo-wrap">
-    <img src="stormy-headshot.jpeg" alt="Stormy Jackson" class="about-photo">
+  <div class="moodboard-wrap" id="moodboardWrap">
+    <div class="moodboard" id="moodboard">
+
+      <!-- ── ROW 1: 4 photos ── -->
+
+      <!-- Charli XCX -->
+      <div class="mb" style="width:158px;height:158px;top:5px;left:0;transform:rotate(6deg);z-index:3;">
+        <img src="about-photos/charli-xcx.webp" alt="Charli XCX">
+      </div>
+
+      <!-- Noodles -->
+      <div class="mb" style="width:192px;height:148px;top:10px;left:168px;transform:rotate(-5deg);z-index:3;">
+        <img src="about-photos/noodles.jpg" alt="Food">
+      </div>
+
+      <!-- Brunch -->
+      <div class="mb" style="width:195px;height:152px;top:4px;left:368px;transform:rotate(4deg);z-index:3;">
+        <img src="about-photos/brunch.jpg" alt="Brunch">
+      </div>
+
+      <!-- Smiling portrait — polaroid -->
+      <div class="mb polar" style="width:155px;height:185px;top:77px;left:572px;transform:rotate(-6deg);z-index:10;">
+        <img src="about-photos/smiling-portrait.jpg" alt="Stormy">
+      </div>
+
+      <!-- ── ROW 2: 3 photos ── -->
+
+      <!-- Beach selfie — polaroid, main -->
+      <div class="mb polar" style="width:232px;height:282px;top:192px;left:0;transform:rotate(-3deg);z-index:4;">
+        <img src="about-photos/beach-selfie.jpg" alt="Stormy at the beach">
+      </div>
+
+      <!-- Painted mug -->
+      <div class="mb" style="width:198px;height:180px;top:198px;left:248px;transform:rotate(5deg);z-index:3;">
+        <img src="about-photos/painted-mug.jpg" alt="Painted mug">
+      </div>
+
+      <!-- Polaroid portrait -->
+      <div class="mb" style="width:178px;height:272px;top:188px;left:462px;transform:rotate(-3deg);z-index:4;">
+        <img src="about-photos/polaroid.jpg" alt="Stormy">
+      </div>
+
+      <!-- ── PRODUCT STICKERS scattered on top ── -->
+
+      <!-- Bracelet — center gap between rows -->
+      <div class="mb cutout" style="width:155px;height:130px;top:145px;left:375px;transform:rotate(-12deg);z-index:8;mix-blend-mode:normal;">
+        <img src="about-photos/bracelet.png" alt="Bracelet">
+      </div>
+
+      <!-- Lipstick — cream gap between Charli XCX, noodles, and beach selfie -->
+      <div class="mb cutout" style="width:97px;height:152px;top:142px;left:180px;transform:rotate(-7deg);z-index:8;mix-blend-mode:normal;">
+        <img src="about-photos/lipstick.png" alt="Lipstick">
+      </div>
+
+      <!-- Setting spray — right of polaroid, on cream -->
+      <div class="mb cutout" style="width:100px;height:162px;top:251px;left:652px;transform:rotate(-8deg);z-index:10;">
+        <img src="about-photos/setting-spray.jpeg" alt="Setting spray">
+      </div>
+
+    </div>
   </div>
+
+  <h2 class="about-greeting"><span style="color:#FD830B;">Hey, I'm Stormy!</span> It's nice to meet you.</h2>
 
   <div class="about-bio">
     <p>My passion for design all started with a drawing book I got when I was 7. Growing up, things weren't always easy in a low-income family, but those pages were where I could be myself and just escape for a bit.</p>
@@ -164,5 +241,17 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   <a href="index.html" class="cs-next">← Back to all work</a>
 </div>
 
+<script>
+function scaleMoodboard() {
+  var wrap = document.getElementById('moodboardWrap');
+  var board = document.getElementById('moodboard');
+  if (!wrap || !board) return;
+  var scale = Math.min(wrap.offsetWidth / 800, 1);
+  board.style.transform = 'scale(' + scale + ')';
+  wrap.style.height = Math.round(510 * scale) + 'px';
+}
+window.addEventListener('resize', scaleMoodboard);
+scaleMoodboard();
+</script>
 </body>
 </html>
