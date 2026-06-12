@@ -80,12 +80,86 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   border-radius: 0;
 }
 
-/* BIO */
-.about-bio p {
-  font-size: 17px; color: #444; line-height: 1.9;
-  margin-bottom: 1.6rem;
+/* SUBHEAD */
+.about-subhead {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  margin-bottom: 3rem;
+  text-align: center;
 }
-.about-bio p:last-child { margin-bottom: 0; }
+
+/* TIMELINE */
+.tl-wrap {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+.tl-wrap::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1.5px;
+  background: #e8e4d8;
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 1fr 32px 1fr;
+  column-gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+/* odd: img | dot | text */
+.tl-item:nth-child(odd) .tl-img  { grid-column: 1; grid-row: 1; }
+.tl-item:nth-child(odd) .tl-dot  { grid-column: 2; grid-row: 1; }
+.tl-item:nth-child(odd) .tl-text { grid-column: 3; grid-row: 1; }
+/* even: text | dot | img */
+.tl-item:nth-child(even) .tl-text { grid-column: 1; grid-row: 1; }
+.tl-item:nth-child(even) .tl-dot  { grid-column: 2; grid-row: 1; }
+.tl-item:nth-child(even) .tl-img  { grid-column: 3; grid-row: 1; }
+.tl-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #FD830B;
+  border: 2.5px solid #FFFDF7;
+  box-shadow: 0 0 0 2px #FD830B;
+  justify-self: center;
+  position: relative; z-index: 1;
+}
+.tl-img { width: 220px; height: 220px; }
+.tl-placeholder {
+  width: 100%; height: 100%;
+  border: 2px dashed #f0c990;
+  border-radius: 14px;
+  background: #fdf8f0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 1.2rem;
+  gap: 0.5rem;
+}
+.tl-placeholder svg { opacity: 0.35; }
+.tl-placeholder-label {
+  font-size: 11px; font-weight: 700;
+  color: #FD830B; letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tl-placeholder-size {
+  font-size: 11px; color: #bbb; letter-spacing: 0.03em;
+}
+.tl-text { flex: 1; }
+.tl-year {
+  font-size: 11px; font-weight: 700; color: #FD830B;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.tl-caption {
+  font-size: 17px; color: #444; line-height: 1.7;
+}
 
 /* CTA */
 .about-cta {
@@ -135,6 +209,21 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   .nav-links { display: none; }
   .about-body { padding: 2rem 1.2rem 3rem; }
   .cs-footer-nav { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.2rem; }
+  .tl-wrap::before { display: none; }
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    text-align: center;
+    row-gap: 1rem;
+  }
+  .tl-item:nth-child(odd) .tl-img,
+  .tl-item:nth-child(even) .tl-img  { grid-column: 1; grid-row: 1; }
+  .tl-item:nth-child(odd) .tl-text,
+  .tl-item:nth-child(even) .tl-text { grid-column: 1; grid-row: 2; }
+  .tl-dot { display: none; }
 }
 </style>
 </head>
@@ -217,14 +306,58 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   </div>
 
   <h2 class="about-greeting"><span style="color:#FD830B;">Hey, I'm Stormy!</span> It's nice to meet you.</h2>
+  <p class="about-subhead">My timeline of becoming a designer</p>
 
-  <div class="about-bio">
-    <p>My passion for design all started with a drawing book I got when I was 7. Growing up, things weren't always easy in a low-income family, but those pages were where I could be myself and just escape for a bit.</p>
-    <p>High school was where things got real with design. I dived into graphic and web design classes and fell for the digital world. But there was a problem — I couldn't afford a laptop to use at home. But I didn't let that stop me. I decided to sell candy bars at school. It took a while, but I finally saved enough for my own laptop and that all-important Adobe software. Talk about a lesson in determination!</p>
-    <p>College was where things took off. I went for a design degree and found my creative voice as well as gained knowledge in critical and creative thinking, visual and aesthetic sense, and dynamics of business and technology and integrated those learnings through design. Plus I got to work at jobs that taught me something new about teamwork, carrying out my designs from start to finish, and designing experiences that make a difference.</p>
-    <p>For me, product design is this incredible mash-up of art, technology, and understanding what makes people tick. It's more than a job; it's my passion and, dare I say, my calling.</p>
-    <p>I'm all about diving head-first into the product design world and keeping up with the latest and greatest. Always up for a challenge and keen to keep learning.</p>
-    <p>If you're into talking about design, job opportunities, or just want to say hi, feel free to message me via email or LinkedIn. Let's see what cool things we can create together!</p>
+  <div class="tl-wrap">
+
+    <!-- 1: Drawing book -->
+    <div class="tl-item">
+      <div class="tl-img" style="height:auto;transform:rotate(-8deg);">
+        <img src="about-photos/drawing-book.jpg" alt="Ed Emberley's Jumbo Color Drawing Book" style="width:100%;height:auto;display:block;border-radius:6px;box-shadow:2px 6px 20px rgba(0,0,0,0.15);">
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">
+        <p class="tl-year">Age 7</p>
+        <p class="tl-caption">It started with a drawing book my grandma bought me. It sparked my love for art and quickly became my favorite hobby.</p>
+      </div>
+    </div>
+
+    <!-- 2: Candy bars + laptop -->
+    <div class="tl-item">
+      <div class="tl-text">
+        <p class="tl-year">High School</p>
+        <p class="tl-caption">My family couldn't afford a laptop, so I sold candy bars at school until I could. That's when I discovered digital design — and fell in love with it.</p>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-img" style="height:auto;width:317px;">
+        <img src="about-photos/candy-bar-laptop.svg" alt="Candy bar and laptop" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+
+    <!-- 3: College -->
+    <div class="tl-item">
+      <div class="tl-img" style="height:auto;">
+        <img src="about-photos/usc-logo.png" alt="USC" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">
+        <p class="tl-year">College</p>
+        <p class="tl-caption">Studied design and found my true calling — using art and technology to help people. That's how I discovered and pursued product design.</p>
+      </div>
+    </div>
+
+    <!-- 4: Now -->
+    <div class="tl-item">
+      <div class="tl-text">
+        <p class="tl-year">Now</p>
+        <p class="tl-caption">Designing products people love, illustrating for fun, and always working on something new.</p>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-img" style="height:auto;">
+        <img src="about-photos/cat-typing.gif" alt="Cat typing" style="width:100%;height:auto;display:block;border-radius:8px;">
+      </div>
+    </div>
+
   </div>
 
   <div class="about-cta">
