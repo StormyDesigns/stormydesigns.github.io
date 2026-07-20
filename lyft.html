@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyft In-App Phone Calls — Stormy Jackson</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a; }
+
+/* NAV */
+.nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 2.5rem; border-bottom: 1px solid #e8e4d8;
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.nav-links { display: flex; gap: 2rem; font-size: 14px; }
+.nav-links a { text-decoration: none; color: #888; transition: color 0.2s; }
+.nav-links a:hover { color: #1a1a1a; }
+.nav-back { font-size: 14px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: #FD830B; }
+
+/* HERO */
+.cs-hero { background: #C2126E; padding: 8rem 2.5rem 7rem; }
+.cs-hero-inner { max-width: 860px; margin: 0 auto; }
+.cs-tag {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: 1.2rem;
+}
+.cs-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; color: #fff;
+  line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.4rem;
+}
+.cs-subtitle { font-size: 18px; color: rgba(255,255,255,0.92); line-height: 1.7; max-width: 560px; margin-bottom: 3rem; }
+.cs-meta { display: flex; gap: 3rem; flex-wrap: wrap; }
+.cs-meta-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem;
+}
+.cs-meta-value { font-size: 16px; color: rgba(255,255,255,0.92); font-weight: 500; }
+
+/* COVER */
+.cs-cover { max-width: 100%; background: #fff; padding: 32px 2rem; border-bottom: 1px solid #eee; }
+.cs-cover-inner { max-width: 1570px; margin: 0 auto; }
+.cs-cover img { width: 100%; height: auto; display: block; border-radius: 16px; }
+
+/* BODY */
+.cs-body { max-width: 800px; margin: 0 auto; padding: 4rem 2.5rem; }
+
+/* SECTION */
+.cs-section { margin-bottom: 4rem; }
+.cs-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #bbb; margin-bottom: 1rem;
+}
+.cs-section h2 { font-size: 26px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.2; }
+.cs-section h3 { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 0.6rem; margin-top: 1.8rem; line-height: 1.3; }
+.cs-section p { font-size: 16px; color: #444; line-height: 1.85; margin-bottom: 1rem; }
+.cs-section p:last-child { margin-bottom: 0; }
+.cs-section ul { margin: 0.8rem 0 1rem 0; display: flex; flex-direction: column; gap: 0.6rem; padding-left: 0; list-style: none; }
+.cs-section ul li { font-size: 16px; color: #444; line-height: 1.75; padding-left: 1.4rem; position: relative; }
+.cs-section ul li::before { content: '•'; position: absolute; left: 0; color: #C2126E; }
+
+/* PULL QUOTE */
+.cs-pullquote {
+  font-size: 20px; font-weight: 700; color: #C2126E;
+  line-height: 1.5; letter-spacing: -0.01em;
+  border-left: 4px solid #C2126E;
+  padding-left: 1.2rem; margin: 2.5rem 0;
+}
+
+/* CAPTION */
+.cs-sub {
+  font-size: 12px; font-weight: 600; color: #aaa; margin: 0.5rem 0 1.5rem;
+  text-transform: uppercase; letter-spacing: 0.08em; text-align: center;
+}
+
+/* DIVIDER */
+.cs-divider { border: none; border-top: 1px solid #e8e4d8; margin: 4rem 0; }
+
+/* HIGHLIGHT BOX */
+.cs-highlight { background: #FCEBF4; border-radius: 16px; padding: 2rem; margin: 2rem 0; border: 1.5px solid #F5C9E1; }
+.cs-highlight h3 { font-size: 18px; font-weight: 700; color: #C2126E; margin-bottom: 0.8rem; margin-top: 0; }
+.cs-highlight p { font-size: 16px; color: #333; line-height: 1.8; margin-bottom: 0.8rem; }
+.cs-highlight p:last-child { margin-bottom: 0; }
+.cs-highlight ul { list-style: none; padding: 0; margin: 0.6rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.cs-highlight ul li { font-size: 16px; color: #333; line-height: 1.7; padding-left: 1.2rem; position: relative; }
+.cs-highlight ul li::before { content: '•'; position: absolute; left: 0; color: #C2126E; }
+.cs-highlight .validated { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 0.6rem; }
+.cs-highlight .inconclusive { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 0.6rem; }
+
+/* REGULAR IMAGE */
+.cs-img { width: 90%; border-radius: 14px; margin: 1.75rem auto; overflow: hidden; line-height: 0; }
+.cs-img img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.cs-img.cs-img-60 { width: 60%; margin-left: auto; margin-right: auto; }
+.cs-img.cs-img-sm { width: 38%; min-width: 220px; margin-left: auto; margin-right: auto; }
+.cs-img-zoomable { cursor: zoom-in; }
+
+/* PHONE MOCKUP */
+.cs-phone-outer {
+  display: flex; justify-content: center;
+  margin: 2rem 0;
+}
+.cs-phone {
+  display: inline-block; line-height: 0;
+}
+.cs-phone img {
+  display: block; width: 220px; height: auto; border-radius: 14px;
+}
+
+/* PHONE ROW — 2-up */
+.cs-phone-row { display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; }
+.cs-phone-row .cs-phone img { width: 210px; height: auto; border-radius: 12px; }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,10,16,0.88);
+  align-items: center; justify-content: center;
+  padding: 3rem 2rem; cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 28px;
+  font-weight: 300; cursor: pointer; line-height: 1;
+}
+
+/* DEMOGRAPHICS GRID */
+.cs-demo-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+.cs-demo-pill {
+  background: #f5f5f5; border-radius: 999px; padding: 0.5rem 1rem;
+  font-size: 14px; color: #444; font-weight: 600;
+}
+
+/* FOOTER NAV */
+.cs-footer-nav {
+  border-top: 1px solid #e8e4d8; padding: 3rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.cs-footer-cta { font-size: 22px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; }
+.cs-footer-cta span { color: #FD830B; font-style: italic; }
+.cs-next { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.cs-next:hover { color: #FD830B; }
+
+@media (max-width: 768px) {
+  .nav { padding: 1rem 1.2rem; }
+  .nav-links { display: none; }
+  .cs-hero { padding: 4rem 1.2rem 3.5rem; }
+  .cs-cover { padding: 24px 1.2rem; }
+  .cs-body { padding: 2.5rem 1.2rem; }
+  .cs-meta { gap: 1.5rem; }
+  .cs-phone-row { flex-direction: column; align-items: center; }
+  .cs-phone-row .cs-phone-outer { width: 100%; }
+  .cs-footer-nav { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-back">← Back to work</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="/Stormy-Jackson-Resume.pdf" target="_blank">Resume</a>
+    <a href="index.html#about">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="cs-hero">
+  <div class="cs-hero-inner">
+    <div class="cs-tag">Ridesharing · Trip Experience</div>
+    <h1 class="cs-title">Lyft In-App Phone Calls</h1>
+    <p class="cs-subtitle">Designing in-app voice calling so riders and drivers can reach each other without missed calls, spam confusion, or exposed phone numbers.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">My Role</div>
+        <div class="cs-meta-value">Lead Designer</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">8 Weeks</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Platform</div>
+        <div class="cs-meta-value">iOS &amp; Android</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Type</div>
+        <div class="cs-meta-value">B2C · Ridesharing · VoIP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="cs-cover">
+  <div class="cs-cover-inner">
+    <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/c016ca2a-5ca5-4589-8bf0-55eed44bc0ec_rw_1920.png?h=450981fab2f0fdeceff179ec5807f137" alt="Lyft in-app phone calls — final deliverables">
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <!-- OVERVIEW / PROBLEM -->
+  <div class="cs-section">
+    <div class="cs-section-label">Overview</div>
+    <h2>The problem</h2>
+    <p>I interned as a product designer on Lyft's Trip Experience team, which owns the core flow of taking a ride — from selecting a pickup spot to ending the trip. I led design for a new way for riders and drivers to reach each other: <strong>calling from inside the app.</strong></p>
+
+    <p>Missed calls were one of the most painful parts of driver-rider communication — painful enough to be folded into Lyft's Negative Experience Score, and tied to worse long-term retention. In-app chat existed, but it wasn't the whole answer: <strong>about a quarter of text-initiated conversations ended in a phone call anyway.</strong></p>
+
+    <p class="cs-pullquote">How might I reduce missed calls by extending in-app communication to cover phone calls, too?</p>
+
+    <div class="cs-highlight">
+      <h3>Understanding the problem</h3>
+      <ul>
+        <li><strong>Why it matters:</strong> driver calls to riders currently come from an unknown number. Unsure who's calling, riders dismiss them as spam — <strong>15% of driver calls to riders go unanswered.</strong></li>
+        <li><strong>Who's affected:</strong> Lyft's core demographic is low-to-mid-income riders aged 18–35, drawn to Lyft for freedom from driving, parking, and navigating.</li>
+        <li><strong>The goal:</strong> create an experience for both riders and drivers to communicate effectively before pickup.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- RESEARCH -->
+  <div class="cs-section">
+    <div class="cs-section-label">Research</div>
+    <h2>Grounding the solution in VoIP</h2>
+    <p>In-app calling meant building on <strong>VoIP (Voice over Internet Protocol)</strong> — the same technology behind calling in Facebook, Instagram, and Google Hangouts. Two things made it the right foundation:</p>
+    <ul>
+      <li><strong>Cost:</strong> VoIP calls are free with an internet connection, and cheaper than cellular otherwise.</li>
+      <li><strong>Privacy:</strong> calls route over the internet, so a rider's or driver's personal number is never shared.</li>
+    </ul>
+
+    <h3>Competitive analysis</h3>
+    <p>I studied how other apps implement VoIP calling to understand what worked and which usability pitfalls to avoid.</p>
+    <div class="cs-img cs-img-zoomable" onclick="openLightbox(this.querySelector('img').src)">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/2289b669-56b7-4276-9eb3-c13121b0c557_rw_3840.png?h=bb4f2744038be7e92636d9bb22396cd4" alt="Competitive analysis of VoIP calling patterns">
+    </div>
+    <p class="cs-sub">Snippet of the competitive analysis — click to expand</p>
+
+    <p>The clearest pattern: <strong>incoming calls take over the full screen.</strong> Unlike messages, a call demands an immediate decision — answer or ignore — so an intrusive, information-dense prompt is warranted: a number, a name, a photo if possible, each detail curated by how much it matters.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/8a4439e5-5e33-4eef-ba44-aa1ccbd426fb_rw_1920.png?h=1dd6ab160e482aca18f92dcfd919d512" alt="Android and iOS native VoIP call patterns">
+    </div>
+    <p class="cs-sub">Android and iOS native VoIP calls</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- DESIGN EXPLORATIONS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Design Explorations</div>
+    <h2>From first prompts to a validated flow</h2>
+
+    <h3>In-app call prompts</h3>
+    <p>Since in-app calls are free for riders, I wanted to nudge them toward choosing one over a cellular call. Early copy made clear that the rider's number wouldn't be used, but <strong>didn't make clear that the call was free</strong> — a gap I needed to close before user testing.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/d0e9c272-8324-459a-a151-5de6e904676d_rw_1920.png?h=3fcc94c64318b9956be1d404ae070945" alt="In-app call prompt explorations">
+    </div>
+    <p class="cs-sub">In-app prompt explorations</p>
+
+    <h3>Accessibility prompts</h3>
+    <p>Phone calls aren't always the best way for a driver to communicate. For drivers who are hard of hearing, I designed a prompt encouraging riders to message instead. The copy worked — but <strong>not every driver wants to disclose that they're hard of hearing</strong>, and some riders had canceled rides after learning it. That needed a new iteration before testing.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/2ddc5da2-d8a2-4f21-a867-183b8d33a74c_rw_1200.png?h=6de53d2f18e4123b4eb8749177cad1b8" alt="Hard of hearing prompt explorations">
+    </div>
+    <p class="cs-sub">Hard of hearing prompt explorations</p>
+
+    <h3>Full-screen component</h3>
+    <p>Selecting the phone icon took over the entire screen — mute, speakerphone, and end-call controls, with a transparent background so riders could still sense the chat or map underneath. The catch: <strong>a full-screen call made finding the driver's location harder.</strong> Riders had to minimize the call, return to the app, then hunt for their driver — friction I needed to design away.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/119bdae4-9073-4c1f-ba49-c27f17c3c80c_rw_1920.png?h=1d3ef08d78a72bce69975c85661fd413" alt="Full-screen call component">
+    </div>
+    <p class="cs-sub">Full-screen call</p>
+
+    <h3>Minimized call component</h3>
+    <p>To let riders multitask — checking their driver's route, editing the ride — while on a call, I explored a minimized component across four iterations. A <strong>toast</strong> vanished before users could interact with it. A <strong>banner</strong> stayed on screen but lacked an image or context, and banners are reserved for connectivity messaging, not this. Two rounds of a custom component followed, neither yet clearly signaling "you're on a call" before I landed on a version ready for testing.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/e6e8ee9f-8633-47f3-8d86-5eac9eab91ec_rw_1920.png?h=0631b9a8def803d1958e505d37e98af6" alt="Minimized call component iterations">
+    </div>
+    <p class="cs-sub">Minimized call component — iterations 1 through 4</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- USER TESTING / FINAL DESIGNS -->
+  <div class="cs-section">
+    <div class="cs-section-label">User Testing</div>
+    <h2>Validating with real users</h2>
+    <p>With a UX writer, I sharpened the final prompt copy to land two value propositions clearly: <strong>the call is free, and the rider's number stays private.</strong> For drivers who are hard of hearing, "Driver may be hard of hearing" became <strong>"Driver prefers messaging"</strong> — nudging riders toward chat without disclosing a disability.</p>
+
+    <div class="cs-phone-row">
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/8bccf914-de47-477e-8c4c-28a098148241_rw_600.png?h=ee78ae0b1822b930b1d4ea9d39e2cee1" alt="In-app call prompt — final">
+        </div>
+      </div>
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/3739bbef-7a67-41ab-b062-a6833cc7ab2b_rw_600.png?h=c9bff450907ff951558bc8179b8d7e01" alt="Driver prefers messaging prompt — final">
+        </div>
+      </div>
+    </div>
+    <p class="cs-sub">In-app call prompt · Driver prefers messaging prompt</p>
+
+    <h3>Outgoing calls</h3>
+    <p>Tapping the phone icon in chat drops down the minimized component. From there, riders can put the call on speaker or end it — and tapping the exit icon returns them to the map to check their driver's route or edit the ride.</p>
+    <div class="cs-phone-outer">
+      <div class="cs-phone">
+        <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/2e8c1882-d712-4c77-b657-4f0bd7546c67_rw_1200.gif?h=384ce64b1865b07d9d8ad426a8476ff0" alt="Outgoing call flow">
+      </div>
+    </div>
+
+    <h3>Incoming calls</h3>
+    <p>Same minimized component, mirrored: riders can answer or decline. Once answered, they get speaker, end-call, and ride-editing options — all without losing their place in the app.</p>
+    <div class="cs-phone-outer">
+      <div class="cs-phone">
+        <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/2b7ec475-b10d-400c-bbce-e7038a6862dd_rw_1200.gif?h=5a2b51aff00d20da5386d1595db3440a" alt="Incoming call flow">
+      </div>
+    </div>
+
+    <h3>Answer/decline button color testing</h3>
+    <p>Before testing, I built two versions of the incoming-call buttons — <strong>red/green</strong> and <strong>white/green</strong> — to check whether color-blind riders could tell them apart.</p>
+    <div class="cs-img">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/13b65d23-124f-4a45-b73d-a0b35d8953e3_rw_1200.png?h=15461b1e9216ec54c6e814d6800776d3" alt="Red/green vs white/green button comparison">
+    </div>
+    <p class="cs-sub">Incoming call button comparison</p>
+
+    <h3>Methodology</h3>
+    <p>I partnered with a UX researcher and ran unmoderated remote tests on usertesting.com — three Figma prototypes covering the "golden path," plus an image comparison to settle the button-color question.</p>
+    <div class="cs-demo-grid">
+      <span class="cs-demo-pill">Age 19–50</span>
+      <span class="cs-demo-pill">African American, Asian, Hispanic, White</span>
+      <span class="cs-demo-pill">Across the U.S.</span>
+      <span class="cs-demo-pill">1 red/green colorblind</span>
+      <span class="cs-demo-pill">1 fully colorblind</span>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- HYPOTHESIS VALIDATION -->
+  <div class="cs-section">
+    <div class="cs-section-label">Results</div>
+    <h2>Was my hypothesis validated?</h2>
+
+    <div class="cs-highlight">
+      <h3>H1 — Prompt copy inclines users to make an in-app call</h3>
+      <p class="validated">VALIDATED ✅ Every participant chose the in-app call.</p>
+      <ul>
+        <li>Only half the users understood that an in-app call keeps their number private — a copy gap to close.</li>
+      </ul>
+    </div>
+
+    <div class="cs-highlight">
+      <h3>H2 — A minimized call makes it easier for riders and drivers to communicate</h3>
+      <p class="inconclusive">INCONCLUSIVE 🤔 Mixed signal — users liked multitasking, but the component itself struggled.</p>
+      <ul>
+        <li>Users liked being able to multitask during a call.</li>
+        <li>The component was hard to notice — testers said it faded into the background.</li>
+        <li>It was hard to reach one-handed, forcing a two-handed grip.</li>
+        <li>It broke users' mental model: most expected a call to take over the full screen, based on other apps.</li>
+      </ul>
+    </div>
+
+    <div class="cs-highlight">
+      <h3>H3 — Riders prefer red/green buttons over white/green</h3>
+      <p class="validated">VALIDATED ✅ All six participants preferred red/green.</p>
+      <ul>
+        <li>Most were already used to red/green from other apps.</li>
+        <li>Both color-blind participants confirmed the shades were distinct enough to tell apart.</li>
+      </ul>
+    </div>
+
+    <h3>Additional learnings</h3>
+    <p><strong>Map visibility:</strong> most users weren't bothered that the map was hidden during a call, and everyone understood that the X returned them to it — though I'd still like to A/B a chat view with the map visible against one without.</p>
+    <p><strong>Speakerphone:</strong> easy to recognize and appreciated for hands-free map viewing, though a few riders said they'd skip it in public. A useful feature, left to each rider's discretion.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- TAKEAWAYS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Takeaways &amp; Next Steps</div>
+    <h2>Where I'd take this next</h2>
+
+    <h3>Differentiating in-app calls from cellular calls</h3>
+    <p>Only half of testers understood the privacy benefit of an in-app call — worth solving before shipping:</p>
+    <ul>
+      <li><strong>Rewire the copy</strong> to spell out that in-app calls use Wi-Fi, not cellular data.</li>
+      <li><strong>Add an info icon</strong> riders can tap for more detail on the difference.</li>
+      <li><strong>Remove the prompt entirely</strong> and auto-route the call based on connection type.</li>
+    </ul>
+    <div class="cs-phone-row">
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/47e9de6e-a534-4312-ad72-1b5c0cd140bd_rw_600.png?h=db2db067a1781547d3f61f5a30dc6a90" alt="Idea 1 — rewired copy">
+        </div>
+      </div>
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/6e97ed8e-962e-4025-8062-31a8396a7f39_rw_600.png?h=6e46da092eda666c1e66625e7d47459a" alt="Idea 2 — info icon">
+        </div>
+      </div>
+    </div>
+    <p class="cs-sub">Idea 1 — rewired copy · Idea 2 — info icon</p>
+
+    <h3>Making outgoing calls more noticeable</h3>
+    <p>To fix the visibility problem from H2, I sketched two ways to enlarge the minimized component — one with an optional full-screen toggle, one without.</p>
+    <div class="cs-phone-row">
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/782c24a0-6f59-4069-b386-740157cda135_rw_1200.gif?h=f56ab673f6ef067fded6714924fa5ea1" alt="Idea 1 — enlarged component with full-screen toggle">
+        </div>
+      </div>
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/186053e9-576f-4ba8-b234-17b945b768f2_rw_1200.gif?h=9f890528e1b4ff7e66b7bd27c01c58cf" alt="Idea 2 — enlarged component, no full-screen">
+        </div>
+      </div>
+    </div>
+    <p class="cs-sub">Idea 1 — enlarge with full-screen toggle · Idea 2 — enlarge, stays minimized</p>
+
+    <h3>Making incoming calls more noticeable</h3>
+    <p>Same problem, mirrored for incoming calls: a full-screen call with a minimize option, or an enlarged minimized component positioned lower on screen for easier one-handed reach.</p>
+    <div class="cs-phone-row">
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/6b5815b8-5504-4f0c-8a05-8896a6a234b2_rw_1200.gif?h=58c05db7b0bea94b05311d31104df48e" alt="Idea 1 — full-screen incoming call with minimize option">
+        </div>
+      </div>
+      <div class="cs-phone-outer" style="margin:0;">
+        <div class="cs-phone">
+          <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/46ba02ed-4673-44f5-8e34-e5e5e1e7f3c7_rw_1200.gif?h=02cf02040830657e7eba3baaa01643f1" alt="Idea 2 — enlarged minimized incoming call">
+        </div>
+      </div>
+    </div>
+    <p class="cs-sub">Idea 1 — full-screen with minimize · Idea 2 — enlarged, stays minimized</p>
+
+    <h3>Edge cases and permission access</h3>
+    <p>Not every call goes right. I mapped what the design should look like when a call ends, when a driver is unavailable, when a call fails, and when connectivity drops.</p>
+    <div class="cs-img cs-img-sm">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/8cbc9673-4fa4-4148-8b21-9a1a0bd79823_rw_1200.png?h=15e947e1cd8aeccbee37eba001d040dc" alt="Edge case designs">
+    </div>
+    <p class="cs-sub">Edge cases</p>
+    <p>And the first time a rider makes an in-app call, Lyft needs microphone access — so that permission request had to be just as clear as everything else in the flow.</p>
+    <div class="cs-img cs-img-sm">
+      <img src="https://cdn.myportfolio.com/f2db5c34-71eb-47ed-a88b-8109529d458c/0639fd39-8261-4015-a1b6-e69af5c33ada_rw_600.png?h=31c70b65480cef85cd897dab172ad839" alt="Microphone permission access flow">
+    </div>
+    <p class="cs-sub">Permission access</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- REFLECTIONS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Reflections</div>
+    <h2>What I'd do differently — and what I learned</h2>
+    <p><strong>Ask more specific questions.</strong> More than once during testing, a user's answer sparked a follow-up I wished I'd planned for. Next time, I'd map out every question I want answered before the session starts, not during it.</p>
+    <p><strong>Run more image comparisons.</strong> I'd have liked to A/B a chat screen with the map visible against one without, to settle that open question with data instead of a hunch.</p>
+
+    <p class="cs-pullquote">There's not really a right or wrong design process. Everyone solves problems differently — what matters is landing on something that actually works.</p>
+
+    <p>Compressing a normal 12-week internship into 8 made this project a crash course in prioritization. Watching how differently everyone on the team approached the same problem was the biggest lesson of the summer: process varies, but impact is the constant.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="cs-footer-nav">
+  <div class="cs-footer-cta">Let's make something <span>people come back to.</span></div>
+  <a href="index.html" class="cs-next">← Back to all work</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+</script>
+
+</body>
+</html>
