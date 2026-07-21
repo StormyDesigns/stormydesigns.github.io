@@ -245,6 +245,7 @@ body { font-family:-apple-system,sans-serif; background:#FFFDF7; }
   font-size:16px; color:#B05000; opacity:0;
   transform:translateX(-6px); transition:all 0.18s; margin-left:6px;
 }
+.mobile-break { display:none; }
 
 /* ABOUT */
 .about {
@@ -518,6 +519,7 @@ body { font-family:-apple-system,sans-serif; background:#FFFDF7; }
     grid-template-columns: 1fr;
     gap: 0.5rem;
     padding: 2rem 1.2rem;
+    text-align: center;
   }
   .a-head { margin-bottom: 0; }
 
@@ -532,6 +534,18 @@ body { font-family:-apple-system,sans-serif; background:#FFFDF7; }
   .footer-links {
     justify-content: center;
     flex-wrap: wrap;
+  }
+  .f-right {
+    text-align: center;
+  }
+  .f-footer-links {
+    justify-content: center;
+  }
+  .f-links {
+    justify-content: center;
+  }
+  .mobile-break {
+    display: inline;
   }
 
   /* ── Scroll hint — hide on mobile ── */
@@ -1072,7 +1086,7 @@ body { font-family:-apple-system,sans-serif; background:#FFFDF7; }
 <div class="about" id="about">
   <div>
     <div class="a-label">About me</div>
-    <div class="a-head">I make complex products <span style="color:#FD830B;font-style:italic;">feel simple.</span></div>
+    <div class="a-head">I make complex products<br class="mobile-break"> <span style="color:#FD830B;font-style:italic;">feel simple.</span></div>
   </div>
   <div class="a-body">
     For the past <strong>6+ years</strong>, I've designed consumer products across healthcare, fintech, mobility, and entertainment. I enjoy untangling complex problems, aligning teams around a clear direction, and creating experiences that feel intuitive from the first interaction.
@@ -1081,7 +1095,7 @@ body { font-family:-apple-system,sans-serif; background:#FFFDF7; }
 <!-- FOOTER -->
 <div class="footer">
   <div>
-    <div class="f-cta">Let's make something <span>people come back to.</span></div>
+    <div class="f-cta">Let's make something<br class="mobile-break"> <span>people come back to.</span></div>
   </div>
   <div class="f-right">
     <div class="f-footer-links">
