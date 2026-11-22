@@ -3,84 +3,172 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mayo Clinic — Stormy Jackson</title>
+<title>Mayo Clinic InfinityView — Stormy Jackson</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a1a; }
+body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a; }
 
 /* NAV */
 .nav {
   display: flex; justify-content: space-between; align-items: center;
   padding: 1.1rem 2.5rem; border-bottom: 1px solid #e8e4d8;
   position: sticky; top: 0; z-index: 200;
-  background: rgba(255,253,247,0.92);
+  background: rgba(255,255,255,0.92);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  max-width: 100%; width: 100%; box-sizing: border-box;
 }
-.nav-links { display: flex; gap: 2rem; font-size: 14px; color: #888; }
+.nav-links { display: flex; gap: 2rem; font-size: 14px; }
 .nav-links a { text-decoration: none; color: #888; transition: color 0.2s; }
 .nav-links a:hover { color: #1a1a1a; }
 .nav-back { font-size: 14px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
 .nav-back:hover { color: #FD830B; }
 
 /* HERO */
-.cs-hero {
-  background: #0B2161;
-  padding: 5rem 2.5rem 4rem;
-}
+.cs-hero { background: #0B2161; padding: 8rem 2.5rem 7rem; }
 .cs-hero-inner { max-width: 860px; margin: 0 auto; }
 .cs-tag {
   display: inline-block; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65);
-  margin-bottom: 1.2rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: 1.2rem;
 }
 .cs-title {
   font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; color: #fff;
   line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.4rem;
 }
-.cs-subtitle {
-  font-size: 18px; color: rgba(255,255,255,0.75);
-  line-height: 1.7; max-width: 560px; margin-bottom: 3rem;
-}
+.cs-subtitle { font-size: 18px; color: rgba(255,255,255,0.92); line-height: 1.7; max-width: 560px; margin-bottom: 3rem; }
 .cs-meta { display: flex; gap: 3rem; flex-wrap: wrap; }
 .cs-meta-label {
   font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.3rem;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem;
 }
-.cs-meta-value { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 500; }
+.cs-meta-value { font-size: 16px; color: rgba(255,255,255,0.92); font-weight: 500; }
 
-/* COVER */
-.cs-cover { max-width: 100%; border-bottom: 1px solid #e8e4d8; line-height: 0; }
-.cs-cover img { width: 100%; height: auto; display: block; }
+/* COVER — final screens strip */
+.cs-cover { background: #E6F1FB; padding: 3rem 2rem; border-bottom: 1px solid #D3E5F7; }
+.cs-cover-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: center; gap: 1.5rem;
+}
+.cs-cover img {
+  width: 100%; max-width: 210px; height: auto; display: block; min-width: 0;
+  border-radius: 18px; box-shadow: 0 10px 30px rgba(11,33,97,0.14);
+}
 
 /* BODY */
 .cs-body { max-width: 800px; margin: 0 auto; padding: 4rem 2.5rem; }
 
 /* SECTION */
-.cs-section { margin-bottom: 3rem; }
-.cs-section p {
-  font-size: 17px; color: #444; line-height: 1.9;
-  margin-bottom: 1.4rem;
+.cs-section { margin-bottom: 4rem; }
+.cs-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #bbb; margin-bottom: 1rem;
 }
+.cs-section h2 { font-size: 26px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.2; }
+.cs-section h3 { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 0.6rem; margin-top: 1.8rem; line-height: 1.3; }
+.cs-section p { font-size: 16px; color: #444; line-height: 1.85; margin-bottom: 1rem; }
 .cs-section p:last-child { margin-bottom: 0; }
+.cs-section ul { margin: 0.8rem 0 1rem 0; display: flex; flex-direction: column; gap: 0.6rem; padding-left: 0; list-style: none; }
+.cs-section ul li { font-size: 16px; color: #444; line-height: 1.75; padding-left: 1.4rem; position: relative; }
+.cs-section ul li::before { content: '•'; position: absolute; left: 0; color: #1C5BBF; }
 
-/* CONFIDENTIAL NOTE */
-.cs-confidential {
-  background: #F5F5F5;
-  border-radius: 14px; padding: 1.6rem 2rem;
-  margin-top: 3rem;
-  display: flex; align-items: flex-start; gap: 1rem;
+/* PULL QUOTE */
+.cs-pullquote {
+  font-size: 20px; font-weight: 700; color: #0B2161;
+  line-height: 1.5; letter-spacing: -0.01em;
+  border-left: 4px solid #1C5BBF;
+  padding-left: 1.2rem; margin: 2.5rem 0;
 }
-.cs-confidential-icon {
-  font-size: 20px; flex-shrink: 0; margin-top: 2px;
+
+/* CAPTION */
+.cs-sub {
+  font-size: 12px; font-weight: 600; color: #aaa; margin: 0.5rem 0 1.5rem;
+  text-transform: uppercase; letter-spacing: 0.08em; text-align: center;
 }
-.cs-confidential p {
-  font-size: 15px; color: #666; line-height: 1.7; margin: 0;
+
+/* DIVIDER */
+.cs-divider { border: none; border-top: 1px solid #e8e4d8; margin: 4rem 0; }
+
+/* HIGHLIGHT BOX */
+.cs-highlight { background: #EEF5FC; border-radius: 16px; padding: 2rem; margin: 2rem 0; border: 1.5px solid #CFE2F6; }
+.cs-highlight h3 { font-size: 18px; font-weight: 700; color: #0B2161; margin-bottom: 0.8rem; margin-top: 0; }
+.cs-highlight p { font-size: 16px; color: #333; line-height: 1.8; margin-bottom: 0.8rem; }
+.cs-highlight p:last-child { margin-bottom: 0; }
+.cs-highlight ul { list-style: none; padding: 0; margin: 0.6rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.cs-highlight ul li { font-size: 16px; color: #333; line-height: 1.7; padding-left: 1.2rem; position: relative; }
+.cs-highlight ul li::before { content: '•'; position: absolute; left: 0; color: #1C5BBF; }
+
+/* NUMBERED INSIGHTS */
+.cs-insights { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+.cs-insight { display: flex; gap: 1.2rem; align-items: flex-start; background: #f7f7f7; border-radius: 14px; padding: 1.4rem 1.6rem; }
+.cs-insight-num {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+  background: #0B2161; color: #fff; font-weight: 800; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
 }
-.cs-confidential a {
-  color: #0B2161; font-weight: 600; text-decoration: none;
+.cs-insight h3 { margin-top: 0.2rem; margin-bottom: 0.3rem; }
+.cs-section .cs-insight p { margin: 0; }
+
+/* OUTCOME GRID */
+.cs-outcomes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+.cs-outcome { background: #EEF5FC; border: 1.5px solid #CFE2F6; border-radius: 14px; padding: 1.4rem 1.5rem; }
+.cs-outcome-icon { font-size: 24px; margin-bottom: 0.6rem; line-height: 1; }
+.cs-outcome-title { font-size: 17px; font-weight: 800; color: #0B2161; margin-bottom: 0.3rem; }
+.cs-outcome-desc { font-size: 15px; color: #444; line-height: 1.6; }
+
+/* PHONE SCREENS */
+.cs-phone-row { display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0 0.5rem; flex-wrap: wrap; }
+.cs-screen { line-height: 0; }
+.cs-screen img {
+  display: block; width: 220px; height: auto; border-radius: 18px;
+  border: 1px solid #e6e6e6; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
-.cs-confidential a:hover { text-decoration: underline; }
+.cs-img-zoomable { cursor: zoom-in; }
+
+/* BEFORE / AFTER */
+.cs-compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; margin: 2rem 0; }
+.cs-compare-col { text-align: center; min-width: 0; }
+.cs-compare-label {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1rem;
+}
+.cs-compare-label.before { background: #f1f1f1; color: #777; }
+.cs-compare-label.after { background: #0B2161; color: #fff; }
+.cs-compare-screens { display: flex; gap: 0.8rem; justify-content: center; }
+.cs-compare-screens img {
+  width: 100%; max-width: 170px; min-width: 0; height: auto; border-radius: 14px;
+  border: 1px solid #e6e6e6; box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+}
+.cs-section .cs-compare ul { text-align: left; margin-top: 1.2rem; }
+.cs-compare .before-list li::before { content: '✕'; color: #bbb; font-size: 13px; top: 2px; }
+.cs-compare .after-list li::before { content: '✓'; color: #1C5BBF; font-weight: 700; }
+
+/* VIDEO */
+.cs-video { display: flex; justify-content: center; margin: 2rem 0 0.5rem; }
+.cs-video video { width: 270px; max-width: 100%; height: auto; display: block; clip-path: inset(0 0 3px 0); }
+
+/* FEATURE (video/screen beside text) */
+.cs-feature { display: flex; gap: 2.5rem; align-items: center; margin: 2rem 0; }
+.cs-feature-media { flex-shrink: 0; line-height: 0; }
+.cs-feature-media video { width: 250px; height: auto; display: block; clip-path: inset(0 0 3px 0); }
+.cs-feature-media img {
+  width: 230px; height: auto; display: block; border-radius: 18px;
+  border: 1px solid #e6e6e6; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.cs-feature-text { min-width: 0; }
+.cs-feature-text h3 { margin-top: 0; }
+.cs-feature.reverse { flex-direction: row-reverse; }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(8,16,40,0.88);
+  align-items: center; justify-content: center;
+  padding: 3rem 2rem; cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 28px;
+  font-weight: 300; cursor: pointer; line-height: 1;
+}
 
 /* FOOTER NAV */
 .cs-footer-nav {
@@ -89,19 +177,25 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
 }
 .cs-footer-cta { font-size: 22px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; }
 .cs-footer-cta span { color: #FD830B; font-style: italic; }
-.cs-next {
-  font-size: 14px; font-weight: 600; color: #888;
-  text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s;
-}
+.cs-next { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
 .cs-next:hover { color: #FD830B; }
 
+@media (max-width: 1000px) {
+  .cs-cover-inner { justify-content: flex-start; overflow-x: auto; padding-bottom: 0.5rem; }
+  .cs-cover img { width: 170px; flex-shrink: 0; }
+}
 @media (max-width: 768px) {
   .nav { padding: 1rem 1.2rem; }
-  .cs-hero { padding: 3rem 1.2rem 2.5rem; }
+  .nav-links { display: none; }
+  .cs-hero { padding: 4rem 1.2rem 3.5rem; }
+  .cs-cover { padding: 2rem 1.2rem; }
   .cs-body { padding: 2.5rem 1.2rem; }
   .cs-meta { gap: 1.5rem; }
+  .cs-compare { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .cs-outcomes { grid-template-columns: 1fr; }
+  .cs-feature, .cs-feature.reverse { flex-direction: column; gap: 1.5rem; }
+  .cs-phone-row .cs-screen img { width: 180px; }
   .cs-footer-nav { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.2rem; }
-  .nav-links { display: none; }
 }
 </style>
 </head>
@@ -120,17 +214,21 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
 <!-- HERO -->
 <div class="cs-hero">
   <div class="cs-hero-inner">
-    <div class="cs-tag">Healthcare · Patient Experience</div>
-    <h1 class="cs-title">Mayo Clinic</h1>
-    <p class="cs-subtitle">Designing digital experiences that help patients navigate their healthcare journey with clarity and confidence.</p>
+    <div class="cs-tag">Healthcare · Medical Imaging</div>
+    <h1 class="cs-title">Mayo Clinic InfinityView</h1>
+    <p class="cs-subtitle">A clearer, more intuitive imaging experience that helps patients understand their own scans, from MRI slices to the radiologist's report.</p>
     <div class="cs-meta">
       <div class="cs-meta-item">
         <div class="cs-meta-label">My Role</div>
-        <div class="cs-meta-value">Product Designer</div>
+        <div class="cs-meta-value">Design Lead</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Team</div>
+        <div class="cs-meta-value">Mayo Clinic Digital Health</div>
       </div>
       <div class="cs-meta-item">
         <div class="cs-meta-label">Platform</div>
-        <div class="cs-meta-value">Mobile &amp; Web</div>
+        <div class="cs-meta-value">iOS</div>
       </div>
       <div class="cs-meta-item">
         <div class="cs-meta-label">Type</div>
@@ -140,19 +238,308 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   </div>
 </div>
 
+<!-- COVER -->
+<div class="cs-cover">
+  <div class="cs-cover-inner">
+    <img src="mayo/screen-key-images.png" alt="InfinityView key images view">
+    <img src="mayo/screen-report.png" alt="InfinityView radiology report drawer">
+    <img src="mayo/screen-multiview.png" alt="InfinityView multi-view anatomical planes">
+    <img src="mayo/screen-notes.png" alt="InfinityView notes list">
+    <img src="mayo/screen-all-images.png" alt="InfinityView all images by series">
+    <img src="mayo/screen-saved.png" alt="InfinityView saved images">
+  </div>
+</div>
 
 <!-- BODY -->
 <div class="cs-body">
 
+  <!-- OVERVIEW -->
   <div class="cs-section">
-    <p>At Mayo Clinic, I design digital experiences that support patients throughout their healthcare journey, from understanding their health information to navigating care with confidence.</p>
-    <p>I partner closely with product, engineering, and research teams to identify patient needs, simplify complex medical information, and translate them into intuitive, accessible solutions across mobile and web platforms. My work focuses on improving how patients engage with their care, reducing confusion, and empowering them to make informed decisions.</p>
-    <p>While much of this work is not yet public, I've contributed to initiatives aimed at transforming the digital healthcare experience, bringing greater clarity, usability, and patient-centered thinking to traditionally complex systems.</p>
+    <div class="cs-section-label">Overview</div>
+    <h2>The problem</h2>
+    <p>When patients at Mayo Clinic get an MRI or CT scan, they can view their images and the radiologist's report in the patient app. But a scan can be hundreds of grayscale slices of anatomy, described in a report written for clinicians. <strong>Patients were left looking at images they couldn't orient themselves in and a report they couldn't connect to what they were seeing.</strong></p>
+    <p>As Design Lead on Mayo Clinic Digital Health, I designed InfinityView: a patient-facing imaging viewer that turns a clinically complex experience into one patients can understand and trust.</p>
+
+    <p class="cs-pullquote">How might we help patients understand their own imaging, without oversimplifying the clinical truth?</p>
+
+    <div class="cs-highlight">
+      <h3>Understanding the problem</h3>
+      <ul>
+        <li><strong>No orientation:</strong> patients paged through scans one image at a time (1 of 187…) with no sense of which part of the body, or which direction, they were looking at.</li>
+        <li><strong>Report separated from imaging:</strong> the radiologist's findings lived apart from the images they described, which invited misinterpretation.</li>
+        <li><strong>Highly clinical styling:</strong> the experience was built around clinical conventions, not patient comprehension, and unclear anatomy left patients feeling scared and overwhelmed.</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="cs-confidential">
-    <div class="cs-confidential-icon">🔒</div>
-    <p>Due to the confidential nature of this work, detailed designs and metrics are not publicly available. If you'd like to learn more about my experience, process, or impact, feel free to reach out — I'd be happy to share more.</p>
+  <hr class="cs-divider">
+
+  <!-- BEFORE & AFTER -->
+  <div class="cs-section">
+    <div class="cs-section-label">Before &amp; After</div>
+    <h2>From a clinical file viewer to a guided experience</h2>
+    <p>The original experience was a web-based file viewer. InfinityView reorganizes the same imaging around how patients actually think: <strong>where am I looking, what does it mean, and what should I ask my doctor?</strong></p>
+
+    <div class="cs-compare">
+      <div class="cs-compare-col">
+        <span class="cs-compare-label before">Before</span>
+        <div class="cs-compare-screens">
+          <img class="cs-img-zoomable" src="mayo/before-1.png" alt="Original web imaging viewer" onclick="openLightbox(this.src)">
+          <img class="cs-img-zoomable" src="mayo/before-2.png" alt="Original web viewer showing image 1 of 187" onclick="openLightbox(this.src)">
+        </div>
+        <ul class="before-list">
+          <li>No anatomical orientation</li>
+          <li>Report separate from imaging</li>
+          <li>Highly clinical styling</li>
+        </ul>
+      </div>
+      <div class="cs-compare-col">
+        <span class="cs-compare-label after">After</span>
+        <div class="cs-compare-screens">
+          <img class="cs-img-zoomable" src="mayo/after-1.png" alt="InfinityView with paired radiology impression" onclick="openLightbox(this.src)">
+          <img class="cs-img-zoomable" src="mayo/after-2.png" alt="InfinityView with scout orientation and key images" onclick="openLightbox(this.src)">
+        </div>
+        <ul class="after-list">
+          <li>Scout orientation</li>
+          <li>Paired impression + image</li>
+          <li>Key images surfaced</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- RESEARCH / INSIGHTS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Research</div>
+    <h2>3 insights that shaped the solution</h2>
+    <p>Talking with patients about how they reviewed their imaging surfaced three patterns that became the backbone of every design decision.</p>
+
+    <div class="cs-insights">
+      <div class="cs-insight">
+        <div class="cs-insight-num">1</div>
+        <div>
+          <h3>Orientation reduces anxiety</h3>
+          <p>Patients said unclear anatomy felt scary and overwhelming. Knowing where they were looking lowered their stress.</p>
+        </div>
+      </div>
+      <div class="cs-insight">
+        <div class="cs-insight-num">2</div>
+        <div>
+          <h3>Report pairing improves confidence</h3>
+          <p>Viewing the report alongside the images prevented misinterpretation and increased comprehension.</p>
+        </div>
+      </div>
+      <div class="cs-insight">
+        <div class="cs-insight-num">3</div>
+        <div>
+          <h3>Notes improve preparation</h3>
+          <p>Patients used notes to ask clearer, more specific questions in their appointments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- INTERACTION MODEL -->
+  <div class="cs-section">
+    <div class="cs-section-label">Solution</div>
+    <h2>The core interaction model</h2>
+    <p>Rather than inventing new interactions for a high-stakes experience, I leaned on <strong>familiar iOS patterns</strong> (segmented controls, drawers, and native motion) and used progressive disclosure so patients only see complexity when they ask for it. Five ideas work together:</p>
+    <ul>
+      <li><strong>Multi-view switch</strong> for anatomical orientation</li>
+      <li><strong>Paired radiology report drawer</strong> that keeps the image in view</li>
+      <li><strong>Linked notes</strong> tied to the exact image slice</li>
+      <li><strong>Key image hierarchy</strong> based on what the radiologist referenced</li>
+      <li><strong>Secure share workflow</strong> for specialists and care teams</li>
+    </ul>
+
+    <div class="cs-video">
+      <video class="cs-autoplay" muted loop playsinline preload="none" poster="mayo/interaction-model-poster.jpg" aria-label="Walkthrough of the InfinityView interaction model">
+        <source src="mayo/interaction-model.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cs-sub">InfinityView walkthrough</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- DESIGN DECISIONS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Design Decisions</div>
+    <h2>My core design decisions</h2>
+
+    <div class="cs-feature">
+      <div class="cs-feature-media">
+        <img class="cs-img-zoomable" src="mayo/screen-multiview.png" alt="Multi-view imaging with side to side, front to back, and top to bottom planes" onclick="openLightbox(this.src)">
+      </div>
+      <div class="cs-feature-text">
+        <h3>Multi-view imaging</h3>
+        <p>Showing multiple anatomical planes (side to side, front to back, top to bottom) gives patients a mental map of their anatomy and <strong>reduces uncertainty about what they're viewing.</strong></p>
+        <ul>
+          <li>Segmented control builds on patterns patients already know</li>
+          <li>Plain-language plane labels replace clinical terminology</li>
+          <li>Aligned to Apple's Human Interface Guidelines</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cs-feature reverse">
+      <div class="cs-feature-media">
+        <video class="cs-autoplay" muted loop playsinline preload="none" poster="mayo/report-drawer-poster.jpg" aria-label="Radiology report drawer sliding over the image">
+          <source src="mayo/report-drawer.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="cs-feature-text">
+        <h3>Paired radiology report + imaging</h3>
+        <p>The report opens in a drawer instead of a new screen, so <strong>patients never lose their place in the scan</strong> while reading the radiologist's findings.</p>
+        <ul>
+          <li>Drawer pattern preserves context as patients scan report details</li>
+          <li>Clinical phrasing preserved for accuracy</li>
+          <li>Pull thresholds and drawer behavior mimic native iOS motion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cs-feature">
+      <div class="cs-feature-media">
+        <video class="cs-autoplay" muted loop playsinline preload="none" poster="mayo/linked-notes-poster.jpg" aria-label="Adding a note anchored to a specific image slice">
+          <source src="mayo/linked-notes.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="cs-feature-text">
+        <h3>Notes anchored to the exact image slice</h3>
+        <p>Patients can leave a note on the specific image that worried them. Each note links back to its series and slice, so <strong>"what is this bump?" becomes a question a doctor can find and answer.</strong></p>
+        <ul>
+          <li>Notes tied to slice ID create traceable context</li>
+          <li>Helps patients prepare questions for consults</li>
+          <li>Improves care-team efficiency, with fewer vague questions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cs-feature reverse">
+      <div class="cs-feature-media">
+        <img class="cs-img-zoomable" src="mayo/key-images.png" alt="Key images surfaced from the radiology report" onclick="openLightbox(this.src)">
+      </div>
+      <div class="cs-feature-text">
+        <h3>Key images defined by radiology references</h3>
+        <p>Instead of dropping patients into hundreds of slices, InfinityView opens on the <strong>images the radiologist actually referenced</strong>: signal, not noise.</p>
+        <ul>
+          <li>Cuts scan time across hundreds of slices</li>
+          <li>Surfaces what matters and filters out the noise</li>
+          <li>Highlights areas mentioned in the radiology impression</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cs-feature">
+      <div class="cs-feature-media">
+        <img class="cs-img-zoomable" src="mayo/sharing-hub.png" alt="Sharing Hub for sending health information" onclick="openLightbox(this.src)">
+      </div>
+      <div class="cs-feature-text">
+        <h3>Simple, secure collaboration with specialists</h3>
+        <p>Patients often need a second opinion or an outside specialist. A secure share workflow lets them <strong>bring their imaging with them</strong> without compromising their privacy.</p>
+        <ul>
+          <li>Enables continuity of care</li>
+          <li>Supports external physician review</li>
+          <li>Protects PHI through a secure share protocol</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- OUTCOMES -->
+  <div class="cs-section">
+    <div class="cs-section-label">Outcomes</div>
+    <h2>What changed for patients</h2>
+    <p>The biggest impact was emotional. For many patients, understanding their scan is the difference between anxiety and confidence going into an appointment.</p>
+
+    <div class="cs-outcomes">
+      <div class="cs-outcome">
+        <div class="cs-outcome-icon">👁️</div>
+        <div class="cs-outcome-title">Improved clarity</div>
+        <div class="cs-outcome-desc">Patients understood what they were looking at and where it sat in their body.</div>
+      </div>
+      <div class="cs-outcome">
+        <div class="cs-outcome-icon">✅</div>
+        <div class="cs-outcome-title">Increased confidence</div>
+        <div class="cs-outcome-desc">Pairing the report with the images helped patients interpret their results correctly.</div>
+      </div>
+      <div class="cs-outcome">
+        <div class="cs-outcome-icon">😌</div>
+        <div class="cs-outcome-title">Reduced confusion</div>
+        <div class="cs-outcome-desc">Orientation and key images cut through the overload of hundreds of slices.</div>
+      </div>
+      <div class="cs-outcome">
+        <div class="cs-outcome-icon">💬</div>
+        <div class="cs-outcome-title">Lower message burden</div>
+        <div class="cs-outcome-desc">Clearer, slice-specific questions meant less back-and-forth for care teams.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- CHALLENGES & LESSONS -->
+  <div class="cs-section">
+    <div class="cs-section-label">Reflections</div>
+    <h2>Challenges &amp; what I learned</h2>
+
+    <div class="cs-highlight">
+      <h3>Challenges</h3>
+      <ul>
+        <li><strong>Clinical accuracy vs. patient comprehension:</strong> every simplification had to stay true to the radiologist's findings.</li>
+        <li><strong>Complex imaging into native patterns:</strong> translating a specialist tool into interactions anyone with an iPhone already understands.</li>
+        <li><strong>Reducing cognitive load without oversimplifying:</strong> the stakes are high, so clarity couldn't come at the cost of truth.</li>
+      </ul>
+    </div>
+
+    <div class="cs-highlight">
+      <h3>Lessons</h3>
+      <ul>
+        <li><strong>Information architecture matters more than visual styling.</strong> How information is structured drives understanding.</li>
+        <li><strong>Pairing the report with the anatomy creates clarity.</strong> Context beats decoration.</li>
+        <li><strong>Progressive disclosure builds emotional safety.</strong> Letting patients go deeper at their own pace reduces the emotional burden.</li>
+      </ul>
+    </div>
+
+    <p class="cs-pullquote">Clarity isn't just a usability metric in healthcare. It reduces the emotional burden of not knowing.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- NEXT -->
+  <div class="cs-section">
+    <div class="cs-section-label">Next Steps</div>
+    <h2>What I'd add next</h2>
+    <div class="cs-insights">
+      <div class="cs-insight">
+        <div class="cs-insight-num">1</div>
+        <div>
+          <h3>Radiologist-defined areas of interest</h3>
+          <p>Let radiologists mark hotspots directly on the image, so patients see exactly what the report is describing.</p>
+        </div>
+      </div>
+      <div class="cs-insight">
+        <div class="cs-insight-num">2</div>
+        <div>
+          <h3>Condition-based personalization</h3>
+          <p>Tailor guidance and context to the patient's condition and the type of scan.</p>
+        </div>
+      </div>
+      <div class="cs-insight">
+        <div class="cs-insight-num">3</div>
+        <div>
+          <h3>AI-assisted, safe-language summaries</h3>
+          <p>Plain-language summaries of the report, written with careful, clinically safe language, built on an architecture that scales.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -162,6 +549,39 @@ body { font-family: -apple-system, sans-serif; background: #FFFDF7; color: #1a1a
   <div class="cs-footer-cta">Let's make something <span>people come back to.</span></div>
   <a href="index.html" class="cs-next">← Back to all work</a>
 </div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+// Play videos only while on screen; show controls instead if the visitor prefers reduced motion
+(function () {
+  var videos = document.querySelectorAll('video.cs-autoplay');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    videos.forEach(function (v) { v.controls = true; v.preload = 'metadata'; });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.play().catch(function () { e.target.controls = true; }); }
+      else { e.target.pause(); }
+    });
+  }, { threshold: 0.35 });
+  videos.forEach(function (v) { io.observe(v); });
+})();
+</script>
 
 </body>
 </html>
