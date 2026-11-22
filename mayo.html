@@ -47,10 +47,7 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
   max-width: 1400px; margin: 0 auto;
   display: flex; justify-content: center; gap: 1.5rem;
 }
-.cs-cover img {
-  width: 100%; max-width: 210px; height: auto; display: block; min-width: 0;
-  border-radius: 18px; box-shadow: 0 10px 30px rgba(11,33,97,0.14);
-}
+.cs-cover .phone { width: 100%; max-width: 200px; min-width: 0; flex-shrink: 1; }
 
 /* BODY */
 .cs-body { max-width: 800px; margin: 0 auto; padding: 4rem 2.5rem; }
@@ -132,25 +129,38 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
 .cs-compare-label.before { background: #f1f1f1; color: #777; }
 .cs-compare-label.after { background: #0B2161; color: #fff; }
 .cs-compare-screens { display: flex; gap: 0.8rem; justify-content: center; }
-.cs-compare-screens img {
-  width: 100%; max-width: 170px; min-width: 0; height: auto; border-radius: 14px;
-  border: 1px solid #e6e6e6; box-shadow: 0 6px 18px rgba(0,0,0,0.07);
-}
+.cs-compare-screens .phone { width: 100%; max-width: 170px; min-width: 0; }
 .cs-section .cs-compare ul { text-align: left; margin-top: 1.2rem; }
 .cs-compare .before-list li::before { content: '✕'; color: #bbb; font-size: 13px; top: 2px; }
 .cs-compare .after-list li::before { content: '✓'; color: #1C5BBF; font-weight: 700; }
 
 /* VIDEO */
 .cs-video { display: flex; justify-content: center; margin: 2rem 0 0.5rem; }
-.cs-video video { width: 270px; max-width: 100%; height: auto; display: block; clip-path: inset(0 0 3px 0); }
+.cs-video video { width: 270px; max-width: 100%; height: auto; display: block; clip-path: inset(0 0 3px 0); aspect-ratio: 1 / 2; }
 
 /* FEATURE (video/screen beside text) */
 .cs-feature { display: flex; gap: 2.5rem; align-items: center; margin: 2rem 0; }
 .cs-feature-media { flex-shrink: 0; line-height: 0; }
-.cs-feature-media video { width: 250px; height: auto; display: block; clip-path: inset(0 0 3px 0); }
-.cs-feature-media img {
-  width: 230px; height: auto; display: block; border-radius: 18px;
-  border: 1px solid #e6e6e6; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+.cs-feature-media video { width: 250px; height: auto; display: block; clip-path: inset(0 0 3px 0); aspect-ratio: 1 / 2; }
+.cs-feature-media .phone { width: 248px; }
+
+/* IPHONE FRAME — for screens that don't already have one baked in */
+.phone { container-type: inline-size; flex-shrink: 0; line-height: 0; }
+.phone-body {
+  position: relative; background: #0d0d0f; border-radius: 15cqw; padding: 3.8cqw;
+  box-shadow: inset 0 0 0 0.7cqw #3a3a3e, 0 10px 28px rgba(0,0,0,0.14);
+}
+.phone-body > img, .phone-body > video {
+  display: block; width: 100%; height: auto; border-radius: 11cqw; background: #fff;
+}
+.phone-body > video {
+  aspect-ratio: 500 / 1078; object-fit: cover; border-radius: 0;
+  /* trim the recording's thin white side edges, then scale back up to fill the screen */
+  clip-path: inset(0.8% round 10.8cqw); transform: scale(1.0163);
+}
+.phone-notch {
+  position: absolute; top: 3.8cqw; left: 50%; transform: translateX(-50%); z-index: 1;
+  width: 32cqw; height: 7cqw; background: #0d0d0f; border-radius: 0 0 4.5cqw 4.5cqw;
 }
 .cs-feature-text { min-width: 0; }
 .cs-feature-text h3 { margin-top: 0; }
@@ -182,7 +192,7 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
 
 @media (max-width: 1000px) {
   .cs-cover-inner { justify-content: flex-start; overflow-x: auto; padding-bottom: 0.5rem; }
-  .cs-cover img { width: 170px; flex-shrink: 0; }
+  .cs-cover .phone { width: 165px; max-width: none; flex-shrink: 0; }
 }
 @media (max-width: 768px) {
   .nav { padding: 1rem 1.2rem; }
@@ -241,12 +251,12 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
 <!-- COVER -->
 <div class="cs-cover">
   <div class="cs-cover-inner">
-    <img src="mayo/screen-key-images.png" alt="InfinityView key images view">
-    <img src="mayo/screen-report.png" alt="InfinityView radiology report drawer">
-    <img src="mayo/screen-multiview.png" alt="InfinityView multi-view anatomical planes">
-    <img src="mayo/screen-notes.png" alt="InfinityView notes list">
-    <img src="mayo/screen-all-images.png" alt="InfinityView all images by series">
-    <img src="mayo/screen-saved.png" alt="InfinityView saved images">
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-key-images.png" alt="InfinityView key images view"></div></div>
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-report.png" alt="InfinityView radiology report drawer"></div></div>
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-multiview.png" alt="InfinityView multi-view anatomical planes"></div></div>
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-notes.png" alt="InfinityView notes list"></div></div>
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-all-images.png" alt="InfinityView all images by series"></div></div>
+    <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img src="mayo/screen-saved.png" alt="InfinityView saved images"></div></div>
   </div>
 </div>
 
@@ -284,8 +294,8 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
       <div class="cs-compare-col">
         <span class="cs-compare-label before">Before</span>
         <div class="cs-compare-screens">
-          <img class="cs-img-zoomable" src="mayo/before-1.png" alt="Original web imaging viewer" onclick="openLightbox(this.src)">
-          <img class="cs-img-zoomable" src="mayo/before-2.png" alt="Original web viewer showing image 1 of 187" onclick="openLightbox(this.src)">
+          <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img class="cs-img-zoomable" src="mayo/before-1.png" alt="Original web imaging viewer" onclick="openLightbox(this.src)"></div></div>
+          <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img class="cs-img-zoomable" src="mayo/before-2.png" alt="Original web viewer showing image 1 of 187" onclick="openLightbox(this.src)"></div></div>
         </div>
         <ul class="before-list">
           <li>No anatomical orientation</li>
@@ -296,8 +306,8 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
       <div class="cs-compare-col">
         <span class="cs-compare-label after">After</span>
         <div class="cs-compare-screens">
-          <img class="cs-img-zoomable" src="mayo/after-1.png" alt="InfinityView with paired radiology impression" onclick="openLightbox(this.src)">
-          <img class="cs-img-zoomable" src="mayo/after-2.png" alt="InfinityView with scout orientation and key images" onclick="openLightbox(this.src)">
+          <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img class="cs-img-zoomable" src="mayo/after-1.png" alt="InfinityView with paired radiology impression" onclick="openLightbox(this.src)"></div></div>
+          <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img class="cs-img-zoomable" src="mayo/after-2.png" alt="InfinityView with scout orientation and key images" onclick="openLightbox(this.src)"></div></div>
         </div>
         <ul class="after-list">
           <li>Scout orientation</li>
@@ -373,7 +383,11 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
 
     <div class="cs-feature">
       <div class="cs-feature-media">
-        <img class="cs-img-zoomable" src="mayo/screen-multiview.png" alt="Multi-view imaging with side to side, front to back, and top to bottom planes" onclick="openLightbox(this.src)">
+        <div class="phone"><div class="phone-body"><span class="phone-notch"></span>
+          <video class="cs-autoplay" muted loop playsinline preload="none" poster="mayo/multi-view-poster.jpg" aria-label="Switching between side to side, front to back, and top to bottom anatomical planes">
+            <source src="mayo/multi-view.mp4" type="video/mp4">
+          </video>
+        </div></div>
       </div>
       <div class="cs-feature-text">
         <h3>Multi-view imaging</h3>
@@ -422,7 +436,7 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
 
     <div class="cs-feature reverse">
       <div class="cs-feature-media">
-        <img class="cs-img-zoomable" src="mayo/key-images.png" alt="Key images surfaced from the radiology report" onclick="openLightbox(this.src)">
+        <div class="phone"><div class="phone-body"><span class="phone-notch"></span><img class="cs-img-zoomable" src="mayo/key-images.png" alt="Key images surfaced from the radiology report" onclick="openLightbox(this.src)"></div></div>
       </div>
       <div class="cs-feature-text">
         <h3>Key images defined by radiology references</h3>
@@ -435,20 +449,6 @@ body { font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a;
       </div>
     </div>
 
-    <div class="cs-feature">
-      <div class="cs-feature-media">
-        <img class="cs-img-zoomable" src="mayo/sharing-hub.png" alt="Sharing Hub for sending health information" onclick="openLightbox(this.src)">
-      </div>
-      <div class="cs-feature-text">
-        <h3>Simple, secure collaboration with specialists</h3>
-        <p>Patients often need a second opinion or an outside specialist. A secure share workflow lets them <strong>bring their imaging with them</strong> without compromising their privacy.</p>
-        <ul>
-          <li>Enables continuity of care</li>
-          <li>Supports external physician review</li>
-          <li>Protects PHI through a secure share protocol</li>
-        </ul>
-      </div>
-    </div>
   </div>
 
   <hr class="cs-divider">
